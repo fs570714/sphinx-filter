@@ -1,0 +1,41 @@
+# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+
+name: Python package
+
+on:
+  push:
+    branches: [ "feature/first-release" ]
+  pull_request:
+    branches: [ "feature/first-release" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.10", "3.11"]
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: lint sphinx_filter
+      run: |
+        pylint sphinx_filter/*.py
+    - name: lint unittest
+      run: |
+        pylint test/*.py
+    - name: unittest with coverage report
+      env:
+        COVERAGE_PROCESS_START: pyproject.toml
+      run: |
+        coverage run -m unittest test/unittests.py && coverage combine && coverage report
