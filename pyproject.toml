@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sphinx-filter"
+version = "0.1.0"
+description = "A Sphinx extension to include or exclude sections based on a filter configuration."
+readme = "README.md"
+requires-python = ">= 3.9"
+license = "MIT"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "sphinx",
+]
+
+[project.urls]
+Repository = "https://github.com/fs570714/sphinx-filter"
+"Bug Tracker" = "https://github.com/fs570714/sphinx-filter/issues"
+
+[tool.setuptools.packages.find]
+exclude = ["test*"]
+
+[tool.coverage.run]
+source = ["./"]
+parallel = true
