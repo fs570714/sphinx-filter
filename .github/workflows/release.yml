@@ -2,8 +2,12 @@ name: Release to PyPI
 
 on:
   push:
+    branches:
+      - "**"
     tags:
       - "v*.*.*"
+  pull_request:
+
 
 jobs:
   test:
