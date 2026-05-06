@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "sphinx-filter"
-version = "0.1.0"
+version = "0.2.0"
 description = "A Sphinx extension to include or exclude sections based on a filter configuration."
 readme = "README.md"
 requires-python = ">= 3.9"
